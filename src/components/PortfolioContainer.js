@@ -1,15 +1,21 @@
-import React from "react";
-import Stock from "./Stock";
+import React, { useState } from 'react';
+import Stock from './Stock';
 
-function PortfolioContainer() {
+const PortfolioContainer = () => {
+  const [portfolio, setPortfolio] = useState([]);
+
+  const handleSell = (stock) => {
+    setPortfolio(portfolio.filter(item => item !== stock));
+  };
+
   return (
-    <div>
+    <div className="portfolio-container">
       <h2>My Portfolio</h2>
-      {
-        //render your portfolio stocks here
-      }
+      {portfolio.map((stock, index) => (
+        <Stock key={index} data={stock} onClick={handleSell} />
+      ))}
     </div>
   );
-}
+};
 
 export default PortfolioContainer;
